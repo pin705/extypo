@@ -64,6 +64,9 @@ const downloadJson = () => {
         
         <!-- Hero Section -->
         <div class="text-center space-y-6">
+          <div class="flex justify-center mb-4">
+            <img src="/logo.svg" alt="Extypo Logo" class="w-20 h-20" />
+          </div>
           <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
             <Sparkles class="w-3 h-3 mr-1" />
             AI-Powered Design Extraction

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F172A"/>
+      <stop offset="100%" style="stop-color:#1E293B"/>
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="200" fill="#3B82F6" opacity="0.1"/>
+  <circle cx="1100" cy="530" r="250" fill="#8B5CF6" opacity="0.1"/>
+  
+  <!-- Logo icon -->
+  <g transform="translate(100, 215)">
+    <rect width="200" height="200" rx="40" fill="url(#logoGradient)"/>
+    <path d="M50 70 L150 70 L150 90 L70 90 L70 100 L140 100 L140 120 L70 120 L70 130 L150 130 L150 150 L50 150 Z" fill="white"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="340" y="290" font-family="system-ui, -apple-system, sans-serif" font-size="96" font-weight="800" fill="url(#textGradient)">Extypo</text>
+  <text x="340" y="370" font-family="system-ui, -apple-system, sans-serif" font-size="36" fill="#94A3B8">Design System Extractor</text>
+  
+  <!-- Tagline -->
+  <text x="340" y="430" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#64748B">Extract colors, typography, and components from any website</text>
+  
+  <!-- URL -->
+  <text x="600" y="580" font-family="system-ui, -apple-system, sans-serif" font-size="20" fill="#475569" text-anchor="middle">extypo.vercel.app</text>
+</svg>
