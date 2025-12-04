@@ -4,7 +4,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Copy, Check, Palette, Type, MoveHorizontal, Box, Layers, Component } from 'lucide-vue-next'
+import { Copy, Check, Palette, Type, MoveHorizontal, Box, Layers, Component, Download, BarChart } from 'lucide-vue-next'
+import ExportPanel from './ExportPanel.vue'
+import AnalysisPanel from './AnalysisPanel.vue'
 
 defineProps<{
   data: any
@@ -67,6 +69,12 @@ const copyToClipboard = (text: string) => {
         </TabsTrigger>
         <TabsTrigger value="components" class="flex gap-2 px-4 py-2 data-[state=active]:bg-background data-[state=active]:shadow-sm">
           <Component class="w-4 h-4" /> Components
+        </TabsTrigger>
+        <TabsTrigger value="export" class="flex gap-2 px-4 py-2 data-[state=active]:bg-background data-[state=active]:shadow-sm">
+          <Download class="w-4 h-4" /> Export
+        </TabsTrigger>
+        <TabsTrigger value="analysis" class="flex gap-2 px-4 py-2 data-[state=active]:bg-background data-[state=active]:shadow-sm">
+          <BarChart class="w-4 h-4" /> Analysis
         </TabsTrigger>
       </TabsList>
 
@@ -306,6 +314,14 @@ const copyToClipboard = (text: string) => {
             </CardContent>
           </Card>
         </div>
+      </TabsContent>
+
+      <TabsContent value="export" class="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
+        <ExportPanel :data="data" />
+      </TabsContent>
+
+      <TabsContent value="analysis" class="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
+        <AnalysisPanel :data="data" />
       </TabsContent>
     </Tabs>
   </div>

@@ -73,9 +73,8 @@ The application will be available at `http://localhost:3000`.
 
 - `app/pages/index.vue`: Main application page with extraction logic and UI.
 - `server/api/extract.post.ts`: Backend API endpoint that handles the `dembrandt` extraction process.
-- `components/DesignSystemPreview.vue`: Component for visualizing the extracted data.
-- `components/ui/`: Reusable UI components (Button, Input, Card, etc.) built with shadcn-vue.
-- `tailwind.config.js`: Tailwind configuration with custom animations and shadcn defaults.
+- `app/components/DesignSystemPreview.vue`: Component for visualizing the extracted data.
+- `app/components/ui/`: Reusable UI components (Button, Input, Card, etc.) built with shadcn-vue.
 
 ## License
 
