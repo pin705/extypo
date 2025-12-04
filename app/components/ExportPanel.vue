@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Copy, Check, FileCode, FileJson, Figma } from 'lucide-vue-next'
+import { Copy, Check } from 'lucide-vue-next'
 
 const props = defineProps<{
   data: any

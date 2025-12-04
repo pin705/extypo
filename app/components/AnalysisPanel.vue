@@ -3,8 +3,7 @@ import { computed } from 'vue'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { CheckCircle2, XCircle, AlertTriangle, Download, ExternalLink } from 'lucide-vue-next'
+import { Download } from 'lucide-vue-next'
 
 const props = defineProps<{
   data: any
