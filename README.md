@@ -10,6 +10,14 @@ Extypo is a powerful SaaS application built with Nuxt 4 that allows you to extra
 - 📤 **JSON Export**: Export the full design system configuration for use in your own projects.
 - ⚡ **Modern Tech Stack**: Built with Nuxt 4, Tailwind CSS, and shadcn-vue for a polished, responsive UI.
 
+## Screenshots
+
+![Home Page](./screenshots/home.png)
+_Enter a URL to start extracting_
+
+![Design System Preview](./screenshots/preview.png)
+_Visualized design tokens including colors and typography_
+
 ## Tech Stack
 
 - **Framework**: [Nuxt 4](https://nuxt.com)
