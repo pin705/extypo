@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extypo Screenshots</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #09090b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      gap: 60px;
+    }
+
+    h1 {
+      color: #fafafa;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .screenshot {
+      width: 1280px;
+      height: 800px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      z-index: 1;
+    }
+
+    .popup-mock {
+      width: 360px;
+      background: #18181b;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      border: 1px solid #27272a;
+    }
+
+    .popup-header {
+      padding: 16px;
+      border-bottom: 1px solid #27272a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg {
+      width: 20px;
+      height: 20px;
+      color: white;
+    }
+
+    .logo-text .name {
+      font-weight: 700;
+      font-size: 15px;
+      color: #fafafa;
+    }
+
+    .logo-text .tagline {
+      font-size: 11px;
+      color: #71717a;
+    }
+
+    .status {
+      padding: 4px 10px;
+      background: rgba(34, 197, 94, 0.15);
+      color: #22c55e;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .popup-body {
+      padding: 16px;
+    }
+
+    .page-card {
+      background: #27272a;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .page-favicon {
+      width: 36px;
+      height: 36px;
+      background: #3f3f46;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #71717a;
+    }
+
+    .page-title {
+      font-weight: 600;
+      color: #fafafa;
+      font-size: 13px;
+    }
+
+    .page-url {
+      color: #71717a;
+      font-size: 11px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .stat {
+      flex: 1;
+      background: #27272a;
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fafafa;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: #71717a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .colors-preview {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .color-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .text-content {
+      max-width: 500px;
+      text-align: left;
+    }
+
+    .text-content h2 {
+      font-size: 48px;
+      font-weight: 800;
+      color: #fafafa;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .text-content h2 span {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .text-content p {
+      font-size: 18px;
+      color: #a1a1aa;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #d4d4d8;
+      font-size: 15px;
+    }
+
+    .feature-icon {
+      width: 24px;
+      height: 24px;
+      background: rgba(59, 130, 246, 0.2);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #3b82f6;
+    }
+
+    /* Small promo tile - 440x280 */
+    .promo-small {
+      width: 440px;
+      height: 280px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      color: white;
+    }
+
+    .promo-small .icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .promo-small h3 {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .promo-small p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    /* Large promo tile - 920x680 */
+    .promo-large {
+      width: 920px;
+      height: 680px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      padding: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .promo-large::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
+    }
+
+    .instructions {
+      background: #18181b;
+      padding: 24px;
+      border-radius: 12px;
+      color: #a1a1aa;
+      max-width: 800px;
+      margin-top: 20px;
+    }
+
+    .instructions h3 {
+      color: #fafafa;
+      margin-bottom: 12px;
+    }
+
+    .instructions ol {
+      padding-left: 20px;
+    }
+
+    .instructions li {
+      margin-bottom: 8px;
+    }
+
+    .instructions code {
+      background: #27272a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Screenshot 1: Main Feature (1280x800)</h1>
+  <div class="screenshot" id="screenshot1">
+    <div class="content">
+      <div class="popup-mock">
+        <div class="popup-header">
+          <div class="logo">
+            <div class="logo-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <path d="M21 15l-5-5L5 21"/>
+              </svg>
+            </div>
+            <div class="logo-text">
+              <div class="name">Extypo</div>
+              <div class="tagline">Design System Extractor</div>
+            </div>
+          </div>
+          <div class="status">Extracted</div>
+        </div>
+        <div class="popup-body">
+          <div class="page-card">
+            <div class="page-favicon">🌐</div>
+            <div>
+              <div class="page-title">stripe.com</div>
+              <div class="page-url">Payment infrastructure</div>
+            </div>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-value">24</div>
+              <div class="stat-label">Colors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">8</div>
+              <div class="stat-label">Fonts</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">12</div>
+              <div class="stat-label">Components</div>
+            </div>
+          </div>
+          <div class="colors-preview">
+            <div class="color-swatch" style="background: #635bff"></div>
+            <div class="color-swatch" style="background: #0a2540"></div>
+            <div class="color-swatch" style="background: #00d4ff"></div>
+            <div class="color-swatch" style="background: #7a73ff"></div>
+            <div class="color-swatch" style="background: #11efe3"></div>
+            <div class="color-swatch" style="background: #ffd700"></div>
+            <div class="color-swatch" style="background: #ff5f57"></div>
+            <div class="color-swatch" style="background: #425466"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-content">
+        <h2>Extract <span>Design Systems</span> Instantly</h2>
+        <p>Analyze any website's colors, typography, and components with one click. Perfect for designers and developers.</p>
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">✓</div>
+            <span>Extract colors, fonts & components</span>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">✓</div>
+            <span>Export to JSON or CSS variables</span>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">✓</div>
+            <span>Works on any website</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1>Small Promo Tile (440x280)</h1>
+  <div class="promo-small" id="promo-small">
+    <div class="icon">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <path d="M21 15l-5-5L5 21"/>
+      </svg>
+    </div>
+    <h3>Extypo</h3>
+    <p>Extract Design Systems from Any Website</p>
+  </div>
+
+  <div class="instructions">
+    <h3>📸 How to capture these screenshots:</h3>
+    <ol>
+      <li>Open this HTML file in Chrome</li>
+      <li>Open DevTools (F12) → Click device toolbar icon</li>
+      <li>Set dimensions to exact sizes:
+        <ul>
+          <li>Screenshot: <code>1280 x 800</code></li>
+          <li>Small promo: <code>440 x 280</code></li>
+        </ul>
+      </li>
+      <li>Right-click each element → "Capture node screenshot"</li>
+      <li>Or use <code>Cmd+Shift+P</code> → "Capture area screenshot"</li>
+    </ol>
+  </div>
+
+</body>
+</html>

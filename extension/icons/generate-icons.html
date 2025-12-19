@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generate Extypo Icons</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #1a1a1a;
+      color: white;
+      padding: 40px;
+    }
+    .icons {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .icon-container {
+      text-align: center;
+    }
+    .icon-container p {
+      margin-top: 10px;
+      color: #888;
+    }
+    canvas {
+      border: 1px solid #333;
+      border-radius: 8px;
+    }
+    button {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+    .instructions {
+      background: #222;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 Extypo Icon Generator</h1>
+  
+  <div class="icons">
+    <div class="icon-container">
+      <canvas id="icon128" width="128" height="128"></canvas>
+      <p>128x128</p>
+      <button onclick="download('icon128', 128)">Download</button>
+    </div>
+    <div class="icon-container">
+      <canvas id="icon48" width="48" height="48"></canvas>
+      <p>48x48</p>
+      <button onclick="download('icon48', 48)">Download</button>
+    </div>
+    <div class="icon-container">
+      <canvas id="icon16" width="16" height="16"></canvas>
+      <p>16x16</p>
+      <button onclick="download('icon16', 16)">Download</button>
+    </div>
+  </div>
+
+  <button onclick="downloadAll()">⬇️ Download All Icons</button>
+
+  <div class="instructions">
+    <h3>Instructions:</h3>
+    <ol>
+      <li>Click "Download All Icons" or individual download buttons</li>
+      <li>Save the PNG files to <code>/extension/icons/</code></li>
+      <li>Replace the existing icon files</li>
+    </ol>
+  </div>
+
+  <script>
+    function drawIcon(canvas, size) {
+      const ctx = canvas.getContext('2d');
+      const scale = size / 128;
+      
+      // Clear
+      ctx.clearRect(0, 0, size, size);
+      
+      // Background gradient
+      const gradient = ctx.createLinearGradient(0, 0, size, size);
+      gradient.addColorStop(0, '#3b82f6');
+      gradient.addColorStop(1, '#2563eb');
+      
+      // Rounded rectangle background
+      const radius = 24 * scale;
+      ctx.beginPath();
+      ctx.moveTo(radius, 0);
+      ctx.lineTo(size - radius, 0);
+      ctx.quadraticCurveTo(size, 0, size, radius);
+      ctx.lineTo(size, size - radius);
+      ctx.quadraticCurveTo(size, size, size - radius, size);
+      ctx.lineTo(radius, size);
+      ctx.quadraticCurveTo(0, size, 0, size - radius);
+      ctx.lineTo(0, radius);
+      ctx.quadraticCurveTo(0, 0, radius, 0);
+      ctx.closePath();
+      ctx.fillStyle = gradient;
+      ctx.fill();
+      
+      // Draw "E" letter stylized
+      ctx.strokeStyle = 'white';
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = Math.max(2, 6 * scale);
+      
+      const cx = size / 2;
+      const cy = size / 2;
+      const w = 36 * scale;
+      const h = 44 * scale;
+      
+      // E shape
+      ctx.beginPath();
+      // Top horizontal
+      ctx.moveTo(cx + w/2, cy - h/2);
+      ctx.lineTo(cx - w/2, cy - h/2);
+      // Left vertical
+      ctx.lineTo(cx - w/2, cy + h/2);
+      // Bottom horizontal
+      ctx.lineTo(cx + w/2, cy + h/2);
+      ctx.stroke();
+      
+      // Middle horizontal
+      ctx.beginPath();
+      ctx.moveTo(cx - w/2, cy);
+      ctx.lineTo(cx + w/3, cy);
+      ctx.stroke();
+      
+      // Small accent dots/squares for "design system" feel
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+      const dotSize = Math.max(2, 6 * scale);
+      ctx.fillRect(cx + w/2 - dotSize/2, cy - h/2 - dotSize - 4*scale, dotSize, dotSize);
+    }
+    
+    function download(canvasId, size) {
+      const canvas = document.getElementById(canvasId);
+      const link = document.createElement('a');
+      link.download = `icon${size}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+    
+    function downloadAll() {
+      download('icon128', 128);
+      setTimeout(() => download('icon48', 48), 200);
+      setTimeout(() => download('icon16', 16), 400);
+    }
+    
+    // Draw all icons on load
+    window.onload = function() {
+      drawIcon(document.getElementById('icon128'), 128);
+      drawIcon(document.getElementById('icon48'), 48);
+      drawIcon(document.getElementById('icon16'), 16);
+    };
+  </script>
+</body>
+</html>
