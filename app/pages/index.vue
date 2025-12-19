@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import DesignSystemPreview from '@/components/DesignSystemPreview.vue'
 import { Loader2, Download, Search, Sparkles } from 'lucide-vue-next'
 
+const route = useRoute()
 const url = ref('')
 const loading = ref(false)
 const error = ref('')
@@ -19,6 +21,18 @@ const isValidUrl = (string: string) => {
     return false
   }
 }
+
+// Check for URL parameter on mount (from extension)
+onMounted(() => {
+  const urlParam = route.query.url as string
+  if (urlParam && isValidUrl(urlParam)) {
+    url.value = urlParam
+    // Auto-extract after short delay
+    setTimeout(() => {
+      extract()
+    }, 500)
+  }
+})
 
 const extract = async () => {
   if (!url.value) return
