@@ -77,5 +77,31 @@ export default defineNuxtConfig({
      * @default "@/components/ui"
      */
     componentDir: '@/components/ui'
+  },
+
+  nitro: {
+    preset: 'vercel',
+    // Externalize packages that don't work well in serverless
+    externals: {
+      external: ['playwright-core', '@sparticuz/chromium']
+    },
+    // Configure the extract endpoint with longer timeout
+    routeRules: {
+      '/api/extract': {
+        // Increase timeout for Playwright operations
+        headers: {
+          'Vercel-CDN-Cache-Control': 'max-age=86400',
+          'CDN-Cache-Control': 'max-age=86400',
+          'Cache-Control': 'max-age=86400'
+        }
+      }
+    }
+  },
+
+  // Vercel configuration
+  $production: {
+    nitro: {
+      preset: 'vercel'
+    }
   }
 })

@@ -127,21 +127,41 @@ async function extract(forceRefresh = false) {
     // Update loading steps
     updateLoadingStep(1, 'active');
     
-    // Call API to extract design system
-    const response = await fetch(`${WEB_APP_URL}/api/extract`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ url: tab.url, force: forceRefresh }),
-    });
+    // Call API to extract design system with timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout
+    
+    let response;
+    try {
+      response = await fetch(`${WEB_APP_URL}/api/extract`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url: tab.url, force: forceRefresh }),
+        signal: controller.signal,
+      });
+    } catch (fetchError) {
+      clearTimeout(timeoutId);
+      if (fetchError.name === 'AbortError') {
+        throw new Error('Request timed out. The server may be busy, please try again.');
+      }
+      throw new Error(`Network error: ${fetchError.message}`);
+    }
+    clearTimeout(timeoutId);
 
     updateLoadingStep(1, 'done');
     updateLoadingStep(2, 'active');
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.statusMessage || `API error: ${response.status}`);
+      let errorMessage = `Server error: ${response.status}`;
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.statusMessage || errorData.message || errorMessage;
+      } catch (e) {
+        // Use default error message
+      }
+      throw new Error(errorMessage);
     }
 
     updateLoadingStep(2, 'done');
